@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
+/*
+** BaseViewModel that follow's Mitch's version of MVI architecture.
+ */
 abstract class BaseViewModel<StateEvent, ViewState> : ViewModel() {
     companion object {
         const val TAG = "BaseViewModel"

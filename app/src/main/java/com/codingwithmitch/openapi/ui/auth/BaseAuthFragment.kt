@@ -1,6 +1,7 @@
 package com.codingwithmitch.openapi.ui.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.codingwithmitch.openapi.viewmodels.ViewModelProviderFactory
@@ -23,7 +24,7 @@ abstract class BaseAuthFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = activity?.let {
-            ViewModelProvider(this, providerFactory).get(AuthViewModel::class.java)
+            ViewModelProvider(it, providerFactory).get(AuthViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 
