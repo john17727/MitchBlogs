@@ -1,6 +1,5 @@
 package com.codingwithmitch.openapi.ui.auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.codingwithmitch.openapi.models.AuthToken
 import com.codingwithmitch.openapi.repository.auth.AuthRepository

@@ -1,7 +1,6 @@
 package com.codingwithmitch.openapi.ui.auth
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,17 +28,14 @@ class LoginFragment : BaseAuthFragment() {
     private fun subscribeObservers() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.loginFields?.let { loginFields ->
-                Log.d(TAG, "ViesState Not null")
                 loginFields.login_email?.let { input_email.setText(it) }
                 loginFields.login_password?.let { input_password.setText(it) }
             }
-            Log.d(TAG, "ViewState: $viewState")
         })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "OnDestroyView")
         viewModel.setLoginFields(
             LoginFields(
                 input_email.text.toString(),
