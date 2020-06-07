@@ -23,6 +23,8 @@ class LoginFragment : BaseAuthFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         subscribeObservers()
+
+
     }
 
     private fun subscribeObservers() {
