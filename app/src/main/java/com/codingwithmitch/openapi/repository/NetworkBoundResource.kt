@@ -1,5 +1,6 @@
 package com.codingwithmitch.openapi.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.codingwithmitch.openapi.ui.DataState
@@ -69,14 +70,17 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType>(
     private suspend fun handleNetworkCall(response: GenericApiResponse<ResponseObject>?) {
         when (response) {
             is ApiSuccessResponse -> {
+                Log.e(TAG, "handleNetworkCall: ${response.body}")
                 handleApiSuccessResponse(response)
             }
 
             is ApiErrorResponse -> {
+                Log.e(TAG, "handleNetworkCall: ${response.errorMessage}")
                 onErrorReturn(response.errorMessage, shouldUseDialog = true, shouldUseToast = false)
             }
 
             is ApiEmptyResponse -> {
+                Log.e(TAG, "handleNetworkCall: $response")
                 onErrorReturn(ERROR_UNKNOWN, shouldUseDialog = true, shouldUseToast = false)
             }
         }

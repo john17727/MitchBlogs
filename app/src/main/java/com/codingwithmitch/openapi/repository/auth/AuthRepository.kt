@@ -1,5 +1,6 @@
 package com.codingwithmitch.openapi.repository.auth
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.switchMap
 import com.codingwithmitch.openapi.api.auth.OpenApiAuthService
@@ -49,6 +50,7 @@ constructor(
         ) {
             override suspend fun handleApiSuccessResponse(response: ApiSuccessResponse<LoginResponse>) {
                 if (response.body.response == GENERIC_AUTH_ERROR) {
+                    Log.e(TAG, "handleApiSuccessResponse: ${response.body.errorMessage}")
                     return onErrorReturn(
                         response.body.errorMessage,
                         shouldUseDialog = true,
@@ -142,6 +144,10 @@ constructor(
 
     fun cancelActiveJobs() {
         repositoryJob?.cancel()
+    }
+
+    companion object {
+        private const val TAG = "AuthRepository"
     }
 
 }
