@@ -7,7 +7,7 @@ import javax.inject.Inject
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
     companion object {
-        private const val TAG = "BaseActivity"
+        const val TAG = "BaseActivity"
     }
 
     @Inject

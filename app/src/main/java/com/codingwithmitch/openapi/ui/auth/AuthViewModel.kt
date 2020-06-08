@@ -6,7 +6,7 @@ import com.codingwithmitch.openapi.repository.auth.AuthRepository
 import com.codingwithmitch.openapi.ui.BaseViewModel
 import com.codingwithmitch.openapi.ui.DataState
 import com.codingwithmitch.openapi.ui.auth.state.AuthStateEvent
-import com.codingwithmitch.openapi.ui.auth.state.AuthStateEvent.CheckPreviousAuthEvent
+import com.codingwithmitch.openapi.ui.auth.state.AuthStateEvent.*
 import com.codingwithmitch.openapi.ui.auth.state.AuthViewState
 import com.codingwithmitch.openapi.ui.auth.state.LoginFields
 import com.codingwithmitch.openapi.ui.auth.state.RegistrationFields
@@ -21,11 +21,19 @@ constructor(
 
     override fun handleStateEvent(stateEvent: AuthStateEvent): LiveData<DataState<AuthViewState>> {
         when (stateEvent) {
-            is AuthStateEvent.LoginAttemptEvent -> {
-                return AbsentLiveData.create()
+            is LoginAttemptEvent -> {
+                return authRepository.attemptLogin(
+                    stateEvent.email,
+                    stateEvent.password
+                )
             }
-            is AuthStateEvent.RegisterAttemptEvent -> {
-                return AbsentLiveData.create()
+            is RegisterAttemptEvent -> {
+                return authRepository.attemptRegistration(
+                    stateEvent.email,
+                    stateEvent.username,
+                    stateEvent.password,
+                    stateEvent.confirm_password
+                )
             }
             is CheckPreviousAuthEvent -> {
                 return AbsentLiveData.create()

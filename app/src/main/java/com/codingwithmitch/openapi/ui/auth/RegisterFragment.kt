@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.codingwithmitch.openapi.R
+import com.codingwithmitch.openapi.ui.auth.state.AuthStateEvent.RegisterAttemptEvent
 import com.codingwithmitch.openapi.ui.auth.state.RegistrationFields
 import kotlinx.android.synthetic.main.fragment_register.*
 
@@ -23,6 +24,10 @@ class RegisterFragment : BaseAuthFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         subscribeObservers()
+
+        register_button.setOnClickListener {
+            register()
+        }
     }
 
     private fun subscribeObservers() {
@@ -34,6 +39,17 @@ class RegisterFragment : BaseAuthFragment() {
                 registrationFields.registration_confirm_password?.let { input_password_confirm.setText(it) }
             }
         })
+    }
+
+    fun register() {
+        viewModel.setStateEvent(
+            RegisterAttemptEvent(
+                input_email.text.toString(),
+                input_username.text.toString(),
+                input_password.text.toString(),
+                input_password_confirm.text.toString()
+            )
+        )
     }
 
     override fun onDestroyView() {
